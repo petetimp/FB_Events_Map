@@ -1,0 +1,6 @@
+<?php
+$url="https://graph.facebook.com/oauth/access_token?client_id=321976601537895&client_secret=e8a3de4a53313b0d165ccfa8e7f48373&grant_type=fb_exchange_token&fb_exchange_token=EAACEdEose0cBAKKVYGthC4FiHZCJkcc4gCguZAhw1Idpl93HjZCRX6HOAFQCrhzYyEztxRBKAblrWfM6oCRRMi8OWkONBf55b2fK5dAx0M5dqvpDWALCg5DLbUposwYgOEWXEYBl5NE6AVys7LQGLZCsiZBrgkb1JU8zg6HUdSeHZAyAhzdtCM";
+$data = file_get_contents($url);
+
+echo $data;
+?>
