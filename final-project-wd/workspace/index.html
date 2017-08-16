@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Facebook Events Map</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.9.0/css/lightbox.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="/style.css">
+    <script type="text/javascript" src"https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.9.0/js/lightbox.js"></script>
+    <script type="text/javascript" src="/validate.js"></script>
+    <script type="text/javascript" src="/coordinates.js"></script>
+    <script type="text/javascript" src="/map.js"></script>
+    <script type="text/javascript" src="/twitter.js"></script>
+  </head>
+  <body>
+    <script>
+      var address;
+      
+      jQuery(document).ready(
+        function(){
+          
+            jQuery("#events-search").submit(
+              function(e){
+                e.preventDefault();
+                grabEvents();
+              }  
+            );
+            jQuery("#events-button").click(
+              function(){
+                grabEvents();
+              }  
+            );
+        }
+      );
+      
+      function grabEvents(){
+              jQuery("#ajaxIndicator").show();
+              $.ajax({
+                  type: "POST",
+                  url: 'https://final-project-2-petetimp.c9users.io/server.js', //the URL to your node.js server that has data
+                  dataType: 'text',
+                  cache: false,
+                  data: {lat: latitude,long: longitude, meters: 20000}
+                }).done(
+                  function(data){
+                    
+                    //jQuery('<pre>' + data + '</pre>').appendTo(jQuery("#eventResponse"));
+                    var facebookEvents = jQuery.parseJSON(data);
+                    
+                    for(var i=0; i < facebookEvents.events.length; i++){
+                      //console.log(facebookEvents.events[i]);
+                      
+                    }
+                    
+                    createMap(facebookEvents.events.length,facebookEvents);
+                  }
+                );  
+            }
+    </script>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1 id="app-title">Facebook Events Map</h1>
+          <form id="events-search" method="get" action="#">
+            <div class="form-group">
+              <label>Enter Valid City & State:</label> <input id="address" type="text">
+              <div class="form-control-feedback"></div>
+            </div>
+            <!--<div class="form-group">
+              <label>Enter Distance (in miles):</label> <input id="distance" type="number">
+              <div class="form-control-feedback"></div>
+            </div>-->
+            <input type="submit" class="btn btn-success" disabled value="Search for Events">
+          </form>
+          <div id="events-button"><span>Grab Some Events</span></div>
+          <div id="eventResponse">
+            
+          </div>
+          <div class='marker-tooltip'></div>
+          <div id="map"></div>
+          <div id="twitter-feed">
+            <h2>Tweets</h2>
+            <div id="errors"></div>
+            <ul id="output" class="list-group">
+            </ul>
+            <template id="tweet">
+              <li class="tweet list-group-item">
+                <span class="badge" id="favorite">{{favorite}}</span>
+                <span class="badge" id= "retweet">{{retweet_count}}</span>
+                <span class="profile_image_url">{{profile_image_url}}</span>
+                <span class="user">{{user}}</span>
+                - <span class="body">{{tweet}}</span>
+              </li>
+            </template>
+
+          </div>
+          <div class="modal" id="ajaxIndicator" data-keyboard="false">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body" style="text-align: center;">
+                            <p>Please wait ...</p>
+                            <p>
+                                <img src="ajax-loader.gif" />
+                            </p>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
