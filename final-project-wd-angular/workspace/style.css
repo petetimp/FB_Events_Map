@@ -1,0 +1,190 @@
+.form-control-feedback{
+    display:none;
+    position:relative;
+    width:auto;
+}
+
+.has-success #address, .has-success #distance {
+    box-shadow: 0px 0px 5px #3c763d;
+}
+
+.form-control-feedback {
+    position: relative;
+    width: 100%;
+}
+
+form#events-search {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align:center;
+}
+
+#events-search label {
+    display: block;
+}
+
+#address, #distance {
+    border-radius: 5px;
+    border: 1px solid silver;
+    height: 30px;
+    margin: 15px auto 5px;
+    text-align:center;
+}
+
+h1#app-title {
+    text-align: center;
+    margin: 40px auto;
+}
+
+#map {
+    width:600px;
+    height:420px;
+    margin: 50px auto;
+}
+
+.marker-tooltip {
+    display: none;
+    position: absolute;
+    width: 480px;
+    background-color: white;
+    margin: 15px;
+    bottom: 390px;
+    left: 387px;
+    overflow-y: hidden;
+    padding: 5px 15px;
+    font-size: 12px;
+    border-radius: 5px;
+    border: 2px solid #a3ccff;
+}
+
+span.map-close {
+    display: block!important;
+    position: absolute;
+    top: 0;
+    font-size: 20px;
+    cursor: pointer;
+    left: 95%;
+    width: 19px!important;
+}
+
+.marker-tooltip strong {
+    width: 80px;
+    display: inline-block;
+    vertical-align: top;
+    color: #db7f1e;
+}
+
+.marker-tooltip span {
+    display: inline-block;
+    width: calc(100% - 160px);
+}
+
+.marker-tooltip img {
+    max-width: 80px;
+    margin: 10px auto;
+    float: right;
+    padding-left: 5px;
+}
+
+a.marker-image {
+    float: right;
+    height: 100%;
+}
+
+div#events-button {
+    width: 140px;
+    padding: 5px;
+    background-color: crimson;
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 20px auto;
+    visibility:hidden;
+}
+
+span a[target='_blank'] {
+    color: #34a853;
+    font-weight: bold;
+}
+
+#ajaxIndicator .modal-dialog {
+    top: 50%;
+}
+
+#errors {
+    color: red;
+    white-space: pre-line;
+}
+
+#output .tweet .user {
+    font-weight: bold;
+}
+
+select.form-control {
+    max-width: 200px;
+}
+
+.list-group-item>.badge {
+    width: 32px;
+}
+
+span#favorite {
+    background-color: #00aaaa;
+}
+
+span#retweet {
+    background-color: #aa00aa;    
+}
+
+.marker-tooltip .feed-button {
+    background-color: #1da1f2;
+    width: 100px;
+    text-align: center;
+    padding: 3px;
+    border-radius: 6px;
+    color: white;
+    font-size: 11px;
+    font-weight: bold;
+    display: inline-block;
+    margin: 2px 0 10px 80px;
+    cursor:pointer;
+}
+
+.marker-tooltip i.fa.fa-twitter {
+    padding-right: 2px;
+    font-size: 13px;
+}
+
+#twitter-feed h2, #twitter-feed h3 {
+    text-align: center;
+}
+
+#twitter-feed {
+    position: absolute;
+    width:100%;
+}
+
+#twitter-feed h2{
+    display:none;
+}
+
+#map {
+    max-width: 100%;
+}
+
+@media(max-width:991px){
+    .marker-tooltip {
+        max-width: 100%;
+        position:relative;
+        top:0;
+        left:0;
+        margin:0;
+        bottom:50px;
+    }
+    
+    #twitter-feed{
+        position:relative;
+    }
+}

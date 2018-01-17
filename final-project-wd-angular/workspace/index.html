@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Facebook Events Map</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Lightbox Stylesheet for event images-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.9.0/css/lightbox.css" />
+    <!--Bootstrap-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <!--Font Awesome-->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <!--Custom Css-->
+    <link rel="stylesheet" href="/style.css">
+    <!--Angular 1.6-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <!--Bootstrap JS-->
+    <script type="text/javascript" src"https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!--jQuery-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    <!--Google Maps API-->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <!--Lightbox JS for event images-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.9.0/js/lightbox.js"></script>
+    <!--App Module-->
+    <script type="text/javascript" src="/app.js"></script>
+    <!--App Controller-->
+    <script type="text/javascript" src="/MainController.js"></script>
+  </head>
+  <body ng-app="eventsMap">
+    <div class='main' ng-controller="MainController">
+      
+      <div class="container">
+        <div class="row">
+          
+          <div class="col-md-12">
+            
+            <h1 id="app-title">{{ title }}</h1>
+            <!--Event Search Input Form-->
+            <form id="events-search" method="get" action="#" ng-submit='$event.preventDefault(); grabEvents();'>
+              <div class="form-group">
+                <label>Enter Valid City & State:</label> <input ng-keyup="validateAddress($event);" id="address" type="text">
+                <!--Invalid Input Div-->
+                <div class="form-control-feedback"></div>
+              </div>
+              <input type="submit" class="btn btn-success" disabled value="Search for Events">
+            </form>
+            <!--Button that retriggers grab events function-->
+            <div ng-click='grabEvents();' id="events-button"><span>Grab Some Events</span></div>
+            
+            <!--Used to display Google Map Event details-->
+            <div class='marker-tooltip'></div>
+            <!--Map object-->
+            <div id="map"></div>
+            
+            <!--Integrated Twitter Code-->
+            <div id="twitter-feed">
+              <h2>Tweets</h2>
+              <div id="errors"></div>
+              <ul id="output" class="list-group">
+              </ul>
+              <template id="tweet">
+                <li class="tweet list-group-item">
+                  <span class="badge" id="favorite">{{favorite}}</span>
+                  <span class="badge" id= "retweet">{{retweet_count}}</span>
+                  <span class="profile_image_url">{{profile_image_url}}</span>
+                  <span class="user">{{user}}</span>
+                  - <span class="body">{{tweet}}</span>
+                </li>
+              </template>
+            </div>
+            <!-- /Integrated Twitter Code-->
+            
+          </div>
+          
+          <!-- Integrated Modal -->
+          <div class="modal" id="ajaxIndicator" data-keyboard="false">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-body" style="text-align: center;">
+                  <p>Please wait ...</p>
+                  <p><img src="ajax-loader.gif" /></p>
+                </div>
+              </div>
+              <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+          </div>
+          <!-- /Integrated Modal -->
+              
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
